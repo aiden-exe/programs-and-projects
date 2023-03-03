@@ -1,0 +1,9 @@
+We have used the ‘search nearby’ feature of Google maps to search for restaurants close
+to you. How should Google store the locations of restaurants so that it can answer such queries fast? 
+Note that the list of restaurants remains fairly unchanged over time, while ‘search nearby’ queries are much 
+more frequent. Therefore, it makes sense to pre-process the list of restaurants and create an appropriate 
+data structure that enables processing ‘search nearby’ queries much faster than a brute-force search 
+(assuming the number of “nearby” restaurants is much smaller than the total number of restaurants, 
+which is typically the case).
+
+We have used a range tree implementation to solve this problem.

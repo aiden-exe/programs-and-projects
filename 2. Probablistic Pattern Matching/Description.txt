@@ -1,0 +1,30 @@
+Consider the basic pattern matching problem: given a string p of length m (a.k.a. the
+pattern) and a string x of length n (a.k.a the document), the task is to find all occurrences of p in x. A 
+na¨ıve algorithm for this takes O(mn) time, whereas the smarter Knuth-Morris-Pratt
+algorithm does the job in O(m + n) time. The Knuth-Morris-Pratt algorithm computes the failure function 
+h : {1, . . . ,m} −→ {1, . . . ,m} associated with the pattern p, where
+h(i) is the length of the longest proper prefix of p[1..i] that is also a suffix of p[1..i]. This function is then used
+to process the document. Thus, the function h remains in the working memory, occupying Θ(mlogm) bits
+of space. Another Θ(log n) bits of space is needed to store the current index while scanning the document,
+bringing the overall space complexity to Θ(mlogm+log n). 
+
+The log n term is unavoidable because we have to store at least a constant number of indices, we can cut down the mlogm term.
+We have designed and implemented an algorithm that has the same time complexity as Knuth-Morris-Pratt, but uses only
+O(logm+log n) working memory. Of course, this comes at a cost: the algorithm does report false positives with a tiny probability ε.
+
+Algorithm:
+Assume that the document x is a string over the uppercase Latin alphabet:
+{A,B, . . . , Z}. Identify these characters with numbers as follows: A with 0, B with 1, . . ., Z with 25. A
+string y = y[0]y[1] · · · y[n−1] over the set {A,B, . . . , Z} of length n is the 26-ary representation of the number
+f(y) (i.e. y[0] is the most significant and y[n − 1] is the least significant), and the
+function f is a bijection between strings and non-negative integers. The task of finding occurrences of p in a
+document x is the same as finding all indices i such that f(x[i..(i + m − 1)]) = f(p).
+
+To get around the problem of Ω(m + log n) space, we choose an appropriate prime number q, and store
+f(p) mod q in our working memory instead of f(p). Only O(log q) bits of working memory are sufficient
+for this. Then for each i, we compute f(x[i..(i + m − 1)]) mod q, and report a match if and only if it
+equals f(p) mod q. This does introduce false positives, abut the error probability can be control 
+by choosing q carefully as mentioned in comments. 
+Computing f(x[i..(i + m −1)]) mod q still takes Ω(m) time, we use a rolling hash function, since to shift from i
+to i+1 we only need to add and remove 2 places.This runs in time O(n log2 q), assuming that basic arithmetic operations
+on b-bit numbers take Θ(b) time.

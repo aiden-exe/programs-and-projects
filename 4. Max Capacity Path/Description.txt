@@ -1,0 +1,8 @@
+Given a network of routers and connections, we represent the network as a graph with vertices as
+routers and the edges as connections. Now. assume a situation where each connection (a 'wire' or a
+'broadband') has a particular maximum data transfer rate - we call it the Capacity of the connection.
+This gives a weighted graph where each edge is labelled with it's capacity. We develop an algorithm to
+find the path between two routers s and t, such the minimum capacity of the path is maximized, i.e., we
+can send data through this path faster than any other path.
+
+We have solved this by tweaking the Dijkstra's algorithm to meet the maximation requirement of the problem.

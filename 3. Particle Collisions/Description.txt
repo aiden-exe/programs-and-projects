@@ -1,0 +1,11 @@
+Inspired by the surprising connection between the number of collisions and the number π, I have
+solved a more general problem – only computationally. Consider a set of n point objects located in a
+gravity-free one-dimensional universe, where for i ∈ {0, . . . , n − 1}, the i’th object has mass mi ∈ R, and at
+time t = 0, it is located at position xi ∈ R and has velocity vi ∈ R. Assume that the objects are numbered
+from left to right, that is, x0 < x1 < · · · < xn−1. Given this initial conditions, the objects undergo several
+collisions over time and eventually move away from one another. Since there is no external force
+involved, by Newton’s law, the total momentum of the objects is conserved during every collision. 
+
+I have assumed that each collision is elastic, and therefore, kinetic energy is conserved too. Also, note that 
+can ever “cross” each other, and therefore, collisions can happen only between objects i and i + 1, for some
+i ∈ {0, . . . , n − 2}.
